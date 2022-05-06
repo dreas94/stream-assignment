@@ -45,9 +45,7 @@ public class StreamAssignment {
     @Test
     public void task2()
     {
-        long amount = 0;
-
-        amount = people.stream().count();
+        long amount = people.stream().count();
 
         assertEquals(10000, amount);
     }
@@ -57,10 +55,8 @@ public class StreamAssignment {
      */
     @Test
     public void task3(){
-        long amount = 0;
+        long amount = people.stream().filter(person -> person.getLastName().equalsIgnoreCase("Andersson")).count();
         int expected = 90;
-
-        amount = people.stream().filter(person -> person.getLastName().equalsIgnoreCase("Andersson")).count();
 
         assertEquals(expected, amount);
     }
@@ -124,7 +120,7 @@ public class StreamAssignment {
     public void task8(){
         LocalDate expectedBirthDate = LocalDate.parse("1910-01-02");
 
-        Optional<Person> optional = people.stream().min((p1, p2) -> p1.getDateOfBirth().compareTo(p2.getDateOfBirth()));
+        Optional<Person> optional = people.stream().min(Comparator.comparing(Person::getDateOfBirth));
 
         assertNotNull(optional);
         assertEquals(expectedBirthDate, optional.get().getDateOfBirth());
